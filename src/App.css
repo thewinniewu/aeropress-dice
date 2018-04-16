@@ -1,28 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  font-size: 20px;
+}
+
+a, a:visited {
+  color: #888;
+}
+
+a:active, a:hover {
+  color: #11A0C4;
+}
+
 .App {
   text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-bounce infinite 1s linear;
   height: 80px;
+  margin-bottom: 10px
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #FFDB3D;
   padding: 20px;
-  color: white;
+  color: #222;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 32px;
 }
 
 .App-intro {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes App-logo-bounce {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(25px) scaleY(0.9); }
+  100% { transform: translateY(0); }
+}
+
+.btn {
+  font-family: inherit;
+  padding: 10px 20px;
+  font-size: 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: #11A0C4;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #357AA5;
+}
+
+.card {
+  margin-top: 50px;
+}
+
+.card-block {
+  text-align: left;
+  margin: auto;
+  width: 50%;
+}
+
+ol li {
+  line-height: 1.4;
+}
+
+.App-footer {
+  position: fixed;
+  background-color: #222;
+  color: white;
+  width: 100%;
+  bottom: 0;
+  text-align: right;
+  font-size: 14px;
+  padding: 5px 20px;
+
 }
