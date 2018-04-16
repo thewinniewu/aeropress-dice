@@ -70,14 +70,15 @@ class Recipe extends React.Component {
 
   renderHeatWaterStep() {
     return <li>
-      Heat {this.state.coffeeWaterRatio.water}g of water
-      to {this.state.brewTempC}°C / {toFahrenheit(this.state.brewTempC)}°F.
+      Heat <strong>{this.state.coffeeWaterRatio.water}g</strong> of water
+      to <strong>{this.state.brewTempC}°C</strong> /
+      <strong>{toFahrenheit(this.state.brewTempC)}°F</strong>.
     </li>;
   }
 
   renderGrindCoffeeStep() {
     return <li>
-      Grind {this.state.coffeeWaterRatio.coffee}g of coffee to a {this.state.grindBrewTime.grind} grind.
+      Grind <strong>{this.state.coffeeWaterRatio.coffee}g</strong> of coffee to a {this.state.grindBrewTime.grind} grind.
     </li>;
   }
 
@@ -98,7 +99,8 @@ class Recipe extends React.Component {
   renderBloomStep() {
     if (this.state.bloomWaterG > 0) {
       return <li>
-        Add {this.state.bloomWaterG}g of water and wait {this.state.bloomSeconds} seconds
+        Add <strong>{this.state.bloomWaterG}g</strong> of water and wait
+        <strong> {this.state.bloomSeconds}</strong> seconds
         for the coffee to bloom.
       </li>;
     }
@@ -107,18 +109,18 @@ class Recipe extends React.Component {
   renderAddWaterStep() {
     if (this.state.bloomWaterG > 0) {
       return <li>
-        Add the remaining {this.state.coffeeWaterRatio.water - this.state.bloomWaterG}g of water.
+        Add the remaining <strong>{this.state.coffeeWaterRatio.water - this.state.bloomWaterG}g</strong> of water.
       </li>;
     } else {
       return <li>
-        Add all the water ({this.state.coffeeWaterRatio.water}g).
+        Add all the water (<strong>{this.state.coffeeWaterRatio.water}g</strong>).
       </li>;
     }
   }
 
   renderBrewStep() {
     return <li>
-      Wait {this.state.grindBrewTime.time}s to brew.
+      Wait <strong>{this.state.grindBrewTime.time}s</strong> to brew.
     </li>;
   }
 
