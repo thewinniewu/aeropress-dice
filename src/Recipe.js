@@ -162,15 +162,13 @@ class Recipe extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-12">
-          <h1>
-            <button className="btn btn-primary" onClick={this.handleClick.bind(this)}>Generate a Recipe</button>
-          </h1>
-          <div className="card">
-            <div className="card-block">
-              { this.renderRecipe() }
-            </div>
+      <div>
+        <h1>
+          <button className="btn btn-primary" onClick={this.handleClick.bind(this)}>Generate a Recipe</button>
+        </h1>
+        <div className="card">
+          <div className="card-block">
+            { this.renderRecipe() }
           </div>
         </div>
       </div>
