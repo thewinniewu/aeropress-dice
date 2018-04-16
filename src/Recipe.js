@@ -167,7 +167,7 @@ class Recipe extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="App-recipe">
         <h1>
           <button className="btn btn-primary" onClick={this.handleClick.bind(this)}>
             Generate a Recipe

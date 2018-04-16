@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Inconsolata', monospace;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 a, a:visited {
@@ -34,7 +34,7 @@ a:active, a:hover {
 }
 
 .App-title {
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .App-intro {
@@ -47,13 +47,18 @@ a:active, a:hover {
   100% { transform: translateY(0); }
 }
 
+.App-recipe {
+  padding-bottom: 100px;
+}
+
 .btn {
   font-family: inherit;
   padding: 10px 20px;
-  font-size: 24px;
+  font-size: 20px;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
+  border: none;
   transition: all 0.3s ease-in-out;
 }
 
@@ -93,10 +98,11 @@ ol li {
   width: 100%;
   bottom: 0;
   text-align: right;
-  font-size: 14px;
+  font-size: 12px;
   padding: 5px 20px;
 
 }
+
 .example-enter {
   opacity: 0.01;
 }
