@@ -2,11 +2,11 @@
   "name": "aeropress-dice",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://thewinniewu.github.io/aeropress-dice",
+  "homepage": "http://maximmoinat.github.io/aeropress-dice",
   "dependencies": {
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^1.1.5",
     "react-transition-group": "^1.2.1"
   },
   "scripts": {
@@ -18,6 +18,6 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0"
+    "gh-pages": "^1.2.0"
   }
 }
