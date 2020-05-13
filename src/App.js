@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import aeropress from './aeropress.svg';
 import  Recipe from './Recipe.js';
-import  Clock from './Clock.js';
 import './App.css';
 
 class App extends Component {
@@ -12,7 +11,6 @@ class App extends Component {
           <img src={aeropress} className="App-logo" alt="logo" />
           <h1 className="App-title">Random Aeropress Recipe</h1>
         </header>
-        <Clock/>
         <Recipe/>
         <footer className="App-footer">
           <p>
