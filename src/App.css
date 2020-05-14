@@ -75,15 +75,27 @@ a:active, a:hover {
 .btn-primary:hover {
   background-color: #357AA5;
 }
-/* 
+
 input[type=number] {
-  background: transparent;
-  border: none;
   font-family: 'Inconsolata', monospace;
-  font-size: 16px;
-  color: #fff;
+  font-size: 14px;
   text-align: center;
-} */
+  font-style: italic;
+  padding: 0px 0px 0px 0px;
+  background: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px dashed #83A4C5;
+  width: 50px;
+  overflow: hidden;
+  resize:none;
+} 
+
+label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 14px;
+  font-style: italic;
+}
 
 .card {
   margin-top: 50px;

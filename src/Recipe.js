@@ -192,8 +192,6 @@ class Recipe extends React.Component {
               <label>
                   seed:
                   <input type="number" value={this.state.seed} onChange={this.handleSeedChange}/>
-                  <button onClick={() => {navigator.clipboard.writeText(this.state.seed)}}>Copy to clipboard</button>
-                  
               </label>
           </span>;
       }
