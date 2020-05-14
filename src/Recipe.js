@@ -1,5 +1,4 @@
 import React from 'react';
-import  Timer from './Timer.js';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 const COFFEE_WATER_RATIOS = [
@@ -50,10 +49,8 @@ class Recipe extends React.Component {
       grindBrewTime: GRIND_BREWTIME_RATIOS[0],
       clockwiseStirTimes: CLOCKWISE_STIR_TIMES[0],
       anticlockwiseStir: true,
-      startedBlooming: false,
-      bloomRemainingSeconds: 0,
-      startedBrewing: false,
-      brewRemainingSeonds: 0
+      bloomTimerSeconds: 0,
+      brewTimerSeconds: 0
     };
   }
 
@@ -70,10 +67,8 @@ class Recipe extends React.Component {
         grindBrewTime: randomElement(GRIND_BREWTIME_RATIOS),
         clockwiseStirTimes: randomElement(CLOCKWISE_STIR_TIMES),
         anticlockwiseStir: randomElement([true, false]),
-        startedBlooming: false,
-        bloomRemainingSeconds: this.state.bloomSeconds,
-        startedBrewing: false,
-        brewRemainingSeonds: this.state.grindBrewTime.time
+        bloomTimerSeconds: 0,
+        brewTimerSeconds: 0
       })}, 400);
   }
 
@@ -174,47 +169,55 @@ class Recipe extends React.Component {
     }
   }
    
-  handleBloomClick() {
-      if (this.state.started) {
-          this.state.startedBlooming = true;
-      }
+  startBlooming() {
+      let interval = setInterval(() => {
+          if (this.state.bloomTimerSeconds < this.state.bloomSeconds) {
+              this.setState({
+                  bloomTimerSeconds: this.state.bloomTimerSeconds + 0.1
+              })
+          } else {
+              clearInterval(interval)
+          }
+      }, 100)
   }
   
   renderBloomTimer() {
       if (this.state.started) {
-          if (this.state.startedBlooming) {
-              this.myInterval = setInterval(() => {
-                  this.setState({
-                      bloomRemainingSeconds: this.state.bloomRemainingSeconds - 1
-                  })
-              }, 1000)
-          }
+          let remainingSeconds = this.state.bloomSeconds - this.state.bloomTimerSeconds
+          let displaySeconds = remainingSeconds.toLocaleString(
+                      undefined,
+                      { minimumFractionDigits: 1 }
+          )
           return (
-              <button className="btn btn-primary" onClick={this.handleBloomClick.bind(this)}>
-                Start Blooming {this.state.bloomRemainingSeconds}
+              <button className="btn btn-secondary" onClick={this.startBlooming.bind(this)}>
+                Start Blooming {displaySeconds}
               </button>
           )
       }
   }
   
-  handleGrindClick() {
-      if (this.state.started) {
-          this.state.startedBlooming = true;
-      }
+  startBrewing() {
+      let interval = setInterval(() => {
+          if (this.state.brewTimerSeconds < this.state.grindBrewTime.time) {
+              this.setState({
+                  brewTimerSeconds: this.state.brewTimerSeconds + 0.1
+              })
+          } else {
+              clearInterval(interval)
+          }
+      }, 100)
   }
   
-  renderSteepTimer() {
+  renderBrewTimer() {
       if (this.state.started) {
-          if (this.state.startedBrewing) {
-              this.myInterval = setInterval(() => {
-                  this.setState({
-                      brewRemainingSeonds: this.state.brewRemainingSeonds - 1
-                  })
-              }, 1000)
-          }
+          let remainingSeconds = this.state.grindBrewTime.time - this.state.brewTimerSeconds
+          let displaySeconds = remainingSeconds.toLocaleString(
+                      undefined,
+                      { minimumFractionDigits: 1 }
+          )
           return (
-              <button className="btn btn-primary">
-                Start Brewing {this.state.brewRemainingSeonds}
+              <button className="btn btn-secondary" onClick={this.startBrewing.bind(this)}>
+                Start Brewing {displaySeconds}
               </button>
           )
       }
@@ -235,8 +238,15 @@ class Recipe extends React.Component {
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}>
               { this.renderRecipe() }
-              { this.renderBloomTimer() }
-              { this.renderSteepTimer() }
+            <div className="button-block">
+              <span>
+                { this.renderBloomTimer() }
+              </span>
+              <span>&nbsp;</span>
+              <span>
+                { this.renderBrewTimer() }
+              </span>
+            </div>
             </CSSTransitionGroup>
           </div>
         </div>

@@ -76,6 +76,15 @@ a:active, a:hover {
   background-color: #357AA5;
 }
 
+.btn-secondary {
+  background-color: #FF6347;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #FA8072;
+}
+
 .card {
   margin-top: 50px;
 }
@@ -85,6 +94,11 @@ a:active, a:hover {
   margin: auto;
   width: 50%;
   transition: all 0.5s ease-in-out;
+}
+
+.button-block {
+    text-align: center;
+    transition: all 0.5s ease-in-out;
 }
 
 ol li {
