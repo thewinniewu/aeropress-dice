@@ -76,6 +76,15 @@ a:active, a:hover {
   background-color: #357AA5;
 }
 
+input[type=number] {
+  background: transparent;
+  border: none;
+  font-family: 'Inconsolata', monospace;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+}
+
 .card {
   margin-top: 50px;
 }

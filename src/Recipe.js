@@ -19,8 +19,14 @@ const BLOOM_WATER_G = [30, 60];
 const BREW_TEMP_C = [80, 85, 90, 95];
 const CLOCKWISE_STIR_TIMES = [0, 1, 2];
 
-function randomElement(items) {
-  return items[Math.floor(Math.random()*items.length)];
+function randomElement(items, seed) {
+  let x = Math.sin(seed) * 10000;
+  let random = x - Math.floor(x);
+  return items[Math.floor(random*items.length)];
+}
+
+function getNewSeed() {
+    return new Date().getTime();
 }
 
 function toFahrenheit(celsius) {
@@ -42,6 +48,7 @@ class Recipe extends React.Component {
     this.state = {
       started: false,
       inverted: false,
+      seed: null,
       bloomSeconds: BLOOM_SECONDS[0],
       bloomWaterG: BLOOM_WATER_G[0],
       brewTempC: BREW_TEMP_C[0],
@@ -49,25 +56,37 @@ class Recipe extends React.Component {
       grindBrewTime: GRIND_BREWTIME_RATIOS[0],
       clockwiseStirTimes: CLOCKWISE_STIR_TIMES[0],
       anticlockwiseStir: true,
+      seedAutoGenerate: true
     };
   }
 
   handleClick() {
     this.setState({ started: false });
     this.timer = setTimeout(_ => {
+      if (this.state.seedAutoGenerate) {
+          this.setState({seed: getNewSeed()})
+      }
       this.setState({
         started: true,
-        inverted: randomElement([true, false]),
-        bloomSeconds: randomElement(BLOOM_SECONDS),
-        bloomWaterG: randomElement(BLOOM_WATER_G),
-        brewTempC: randomElement(BREW_TEMP_C),
-        coffeeWaterRatio: randomElement(COFFEE_WATER_RATIOS),
-        grindBrewTime: randomElement(GRIND_BREWTIME_RATIOS),
-        clockwiseStirTimes: randomElement(CLOCKWISE_STIR_TIMES),
-        anticlockwiseStir: randomElement([true, false]),
+        inverted: this.randomElement([true, false]),
+        bloomSeconds: this.randomElement(BLOOM_SECONDS),
+        bloomWaterG: this.randomElement(BLOOM_WATER_G),
+        brewTempC: this.randomElement(BREW_TEMP_C),
+        coffeeWaterRatio: this.randomElement(COFFEE_WATER_RATIOS),
+        grindBrewTime: this.randomElement(GRIND_BREWTIME_RATIOS),
+        clockwiseStirTimes: this.randomElement(CLOCKWISE_STIR_TIMES),
+        anticlockwiseStir: this.randomElement([true, false]),
       })}, 400);
   }
-
+  
+  handleSeedChange(event) {
+      this.setState({seed: event.target.value, seedAutoGenerate: false});
+  }
+  
+  randomElement(element) {
+      return randomElement(element, this.state.seed)
+  }
+  
   renderHeatWaterStep() {
     return <li>
       Heat <strong>{this.state.coffeeWaterRatio.water}g</strong> of water
@@ -90,9 +109,9 @@ class Recipe extends React.Component {
 
   renderInvertStep() {
     if (this.state.inverted) {
-      return <li>Place the aeropress in the upside-down orientation.</li>
+      return <li>Place the aeropress in the <strong>upside-down</strong> orientation.</li>
     } else {
-      return <li>Place the aeropress on the mug in the normal orientation with wet filter and cap on.</li>
+      return <li>Place the aeropress on the mug in the <strong>normal</strong> orientation with wet filter and cap on.</li>
     }
   }
 
@@ -170,7 +189,8 @@ class Recipe extends React.Component {
       <div className="App-recipe">
         <h1>
           <button className="btn btn-primary" onClick={this.handleClick.bind(this)}>
-            Generate a Recipe
+            Generate a Recipe<br/>
+            <input className="input" type="number" value={this.state.seed} onChange={this.handleSeedChange.bind(this)}/>
           </button>
         </h1>
         <div className="card">
