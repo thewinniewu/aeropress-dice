@@ -20,14 +20,20 @@ const BLOOM_WATER_G = [30, 60];
 const BREW_TEMP_C = [80, 85, 90, 95];
 const CLOCKWISE_STIR_TIMES = [0, 1, 2];
 
-function randomElement(items, seed) {
-  let x = Math.sin(seed) * 10000;
-  let random = x - Math.floor(x);
-  return items[Math.floor(random*items.length)];
+function getNewSeed() {
+    return Math.floor(Math.random() * 100000) + 1; // 100k possible seeds, gives chance of one combination not occurring of: (1727/1728)^100000=7.24e-26
 }
 
-function getNewSeed() {
-    return Math.floor(Math.random() * 100000); // Probability of one combination not occurring: (1727/1728)^100000=7.24e-26
+function myRandom(seed) {
+  // Taken from https://stackoverflow.com/a/19303725 by Antti Kissaniemi
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+function randomElement(items, seed) {
+  const r = myRandom(seed)
+  console.log(r)
+  return items[Math.floor(r*items.length)];
 }
 
 function toFahrenheit(celsius) {
@@ -47,10 +53,12 @@ class Recipe extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleSeedChange = this.handleSeedChange.bind(this);
+    this.handleSeedKeyPress = this.handleSeedKeyPress.bind(this);
     this.state = {
       started: false,
       inverted: false,
-      seed: null,
+      startSeed: null,
+      currentSeed: null,
       bloomSeconds: BLOOM_SECONDS[0],
       bloomWaterG: BLOOM_WATER_G[0],
       brewTempC: BREW_TEMP_C[0],
@@ -66,8 +74,17 @@ class Recipe extends React.Component {
     this.setState({ started: false });
     this.timer = setTimeout(_ => {
       if (this.state.seedAutoGenerate) {
-          this.setState({seed: getNewSeed()})
+          const s = getNewSeed();
+          this.setState({
+              startSeed: s,
+              currentSeed: s
+          })
+      } else {
+          this.setState({
+              currentSeed: this.state.startSeed
+          })
       }
+      console.log('New click')
       this.setState({
         started: true,
         inverted: this.randomElement([true, false]),
@@ -81,12 +98,13 @@ class Recipe extends React.Component {
       })}, 400);
   }
   
-  handleSeedChange(event) {
-      this.setState({seed: event.target.value, seedAutoGenerate: false});
-  }
-  
   randomElement(element) {
-      return randomElement(element, this.state.seed)
+      const e = randomElement(element, this.state.currentSeed)
+      // Seed for the next randomElement by getting new random with current seed.
+      this.setState({
+          currentSeed: myRandom(this.state.currentSeed)
+      })
+      return e;
   }
   
   renderHeatWaterStep() {
@@ -186,14 +204,24 @@ class Recipe extends React.Component {
     }
   }
   
+  handleSeedChange(event) {
+      this.setState({startSeed: event.target.value, seedAutoGenerate: false});
+  }
+  
+  handleSeedKeyPress(event) {
+      if (event.key === "Enter") {
+          this.handleClick()
+      }
+  }
+  
   renderSeedControls() {
-      if (this.state.started) {
-          return <span>
-              <label>
-                  seed:
-                  <input type="number" value={this.state.seed} onChange={this.handleSeedChange}/>
-              </label>
-          </span>;
+      if (this.state.started || !this.state.seedAutoGenerate) {
+          return <div className="seed">
+          <label>
+              seed:
+              <input type="number" min="1" max="100000" value={this.state.startSeed} onChange={this.handleSeedChange} onKeyPress={this.handleSeedKeyPress}/>
+          </label>
+          </div>;
       }
   }
 
@@ -211,8 +239,8 @@ class Recipe extends React.Component {
             transitionName="example"
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}>
-              { this.renderRecipe() }
               { this.renderSeedControls() }
+              { this.renderRecipe() }
             </CSSTransitionGroup>
           </div>
         </div>

@@ -76,6 +76,11 @@ a:active, a:hover {
   background-color: #357AA5;
 }
 
+.seed {
+    align-items: center;
+    text-align: center;
+}
+
 input[type=number] {
   font-family: 'Inconsolata', monospace;
   font-size: 14px;
@@ -98,7 +103,7 @@ label {
 }
 
 .card {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .card-block {
