@@ -1,6 +1,7 @@
 import React from 'react';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
+// 4*3*3*2*4*3*2 = 1728 possibilities
 const COFFEE_WATER_RATIOS = [
   { coffee: 23, water: 200 },
   { coffee: 18, water: 250 },
@@ -26,7 +27,7 @@ function randomElement(items, seed) {
 }
 
 function getNewSeed() {
-    return new Date().getTime();
+    return Math.floor(Math.random() * 100000); // Probability of one combination not occurring: (1727/1728)^100000=7.24e-26
 }
 
 function toFahrenheit(celsius) {
@@ -45,6 +46,7 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSeedChange = this.handleSeedChange.bind(this);
     this.state = {
       started: false,
       inverted: false,
@@ -183,14 +185,26 @@ class Recipe extends React.Component {
       </ol>;
     }
   }
+  
+  renderSeedControls() {
+      if (this.state.started) {
+          return <span>
+              <label>
+                  seed:
+                  <input type="number" value={this.state.seed} onChange={this.handleSeedChange}/>
+                  <button onClick={() => {navigator.clipboard.writeText(this.state.seed)}}>Copy to clipboard</button>
+                  
+              </label>
+          </span>;
+      }
+  }
 
   render() {
     return (
       <div className="App-recipe">
         <h1>
           <button className="btn btn-primary" onClick={this.handleClick.bind(this)}>
-            Generate a Recipe<br/>
-            <input className="input" type="number" value={this.state.seed} onChange={this.handleSeedChange.bind(this)}/>
+            Generate a Recipe
           </button>
         </h1>
         <div className="card">
@@ -200,6 +214,7 @@ class Recipe extends React.Component {
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}>
               { this.renderRecipe() }
+              { this.renderSeedControls() }
             </CSSTransitionGroup>
           </div>
         </div>
