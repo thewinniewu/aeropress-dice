@@ -16,7 +16,7 @@ class App extends Component {
           <p>
             Built with &hearts; by <a href="https://github.com/thewinniewu">thewinniewu</a>
             <br/>
-             Inspired by <a href="https://jimseven.com/2017/12/06/coffee-brewing-dice/" target="_blank" rel="noopener noreferrer">
+             Inspired by <a href="https://web.archive.org/web/20171208104650/https://jimseven.com/2017/12/06/coffee-brewing-dice/" target="_blank" rel="noopener noreferrer">
                James Hoffmann's Coffee Brewing Dice
              </a> | Aeropress icon made by <a href="https://www.flaticon.com/authors/monkik" target="_blank" rel="noopener noreferrer">
                monkik
