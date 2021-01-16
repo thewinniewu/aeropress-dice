@@ -184,6 +184,9 @@ class Recipe extends React.Component {
   renderBloomTimer() {
       if (this.state.started) {
           let remainingSeconds = this.state.bloomSeconds - this.state.bloomTimerSeconds
+          if (remainingSeconds < 0) {
+              remainingSeconds = 0;
+          }
           let displaySeconds = remainingSeconds.toLocaleString(
                       undefined,
                       { minimumFractionDigits: 1 }
@@ -211,6 +214,9 @@ class Recipe extends React.Component {
   renderBrewTimer() {
       if (this.state.started) {
           let remainingSeconds = this.state.grindBrewTime.time - this.state.brewTimerSeconds
+          if (remainingSeconds < 0) {
+              remainingSeconds = 0;
+          }
           let displaySeconds = remainingSeconds.toLocaleString(
                       undefined,
                       { minimumFractionDigits: 1 }
