@@ -1,5 +1,5 @@
 import React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group' // ES6
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const COFFEE_WATER_RATIOS = [
   { coffee: 23, water: 200 },
@@ -53,7 +53,7 @@ class Recipe extends React.Component {
   }
 
   handleClick() {
-    this.setState({ started: false });
+    this.setState({ started: false, animating: true });
     this.timer = setTimeout(_ => {
       this.setState({
         started: true,
@@ -148,20 +148,36 @@ class Recipe extends React.Component {
 
   renderRecipe() {
     if (this.state.started) {
-      return <ol key="k">
-        { this.renderHeatWaterStep() }
-        { this.renderGrindCoffeeStep() }
-        { this.renderInvertStep() }
-        { this.renderPourCoffeeStep() }
-        { this.renderBloomStep() }
-        { this.renderAddWaterStep() }
-        { this.renderStirStep() }
-        { this.renderBrewStep() }
-        { this.renderEndInvertStep() }
-        <li>
-          Press.
-        </li>
-      </ol>;
+      return <CSSTransition
+          key={0}
+          classNames="example"
+          timeout={500}
+          unmountOnExit
+          appear>
+          <ol key="k">
+            { this.renderHeatWaterStep() }
+            { this.renderGrindCoffeeStep() }
+            { this.renderInvertStep() }
+            { this.renderPourCoffeeStep() }
+            { this.renderBloomStep() }
+            { this.renderAddWaterStep() }
+            { this.renderStirStep() }
+            { this.renderBrewStep() }
+            { this.renderEndInvertStep() }
+            <li>
+              Press.
+            </li>
+          </ol>
+        </CSSTransition>;
+    } else {
+      return <CSSTransition
+          key={1}
+          classNames="example"
+          timeout={500}
+          unmountOnExit
+          appear>
+        <div/>
+      </CSSTransition>;
     }
   }
 
@@ -175,12 +191,9 @@ class Recipe extends React.Component {
         </h1>
         <div className="card">
           <div className="card-block">
-            <CSSTransitionGroup
-            transitionName="example"
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}>
+            <TransitionGroup>
               { this.renderRecipe() }
-            </CSSTransitionGroup>
+            </TransitionGroup>
           </div>
         </div>
       </div>

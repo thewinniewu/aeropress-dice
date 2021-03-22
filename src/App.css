@@ -112,11 +112,20 @@ ol li {
   transition: opacity 0.3s ease-in-out;
 }
 
-.example-leave {
+.example-exit {
   opacity: 1;
 }
 
-.example-leave.example-leave-active {
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.example-exit.example-exit-active {
   opacity: 0.01;
   transition: opacity 0.3s ease-in-out;
 }
