@@ -76,6 +76,28 @@ a:active, a:hover {
   background-color: #357AA5;
 }
 
+.btn-timer {
+  width: 70px;
+  padding: 4px 8px;
+  font-size: 16px;
+}
+
+
+.btn-timer--start {
+  background-color: #11A0C4;
+  color: white;
+}
+
+.btn-primary--start:hover {
+  background-color: #357AA5;
+}
+
+.btn-timer--finished {
+  color: #222;
+  background-color: #D0F0C0;
+}
+
+
 .card {
   margin-top: 50px;
 }
@@ -83,12 +105,32 @@ a:active, a:hover {
 .card-block {
   text-align: left;
   margin: auto;
-  width: 50%;
+  width: 70%;
   transition: all 0.5s ease-in-out;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .card-block {
+    width: 90%;
+  }
+}
+
+ol {
+  margin: 0;
+  padding: 0;
 }
 
 ol li {
   line-height: 1.4;
+  list-style-position: outside;
+  margin-left: 32px;
+}
+
+
+.timer-subsection {
+  display: inline-block;
+  text-align: right;
 }
 
 .App-footer {

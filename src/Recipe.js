@@ -1,5 +1,6 @@
 import React from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import Timer from './Timer.js';
 
 const COFFEE_WATER_RATIOS = [
   { coffee: 23, water: 200 },
@@ -40,9 +41,11 @@ class Recipe extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
+      numOfRefreshes: 0,
       started: false,
       inverted: false,
       bloomSeconds: BLOOM_SECONDS[0],
+      bloomTimerSeconds: 0,
       bloomWaterG: BLOOM_WATER_G[0],
       brewTempC: BREW_TEMP_C[0],
       coffeeWaterRatio: COFFEE_WATER_RATIOS[0],
@@ -53,7 +56,7 @@ class Recipe extends React.Component {
   }
 
   handleClick() {
-    this.setState({ started: false, animating: true });
+    this.setState({ started: false, animating: true, numOfRefreshes: this.state.numOfRefreshes + 1 });
     this.timer = setTimeout(_ => {
       this.setState({
         started: true,
@@ -65,7 +68,9 @@ class Recipe extends React.Component {
         grindBrewTime: randomElement(GRIND_BREWTIME_RATIOS),
         clockwiseStirTimes: randomElement(CLOCKWISE_STIR_TIMES),
         anticlockwiseStir: randomElement([true, false]),
-      })}, 400);
+      });
+      this.setState({bloomTimerSeconds: this.state.bloomSeconds});
+    }, 400);
   }
 
   renderHeatWaterStep() {
@@ -98,11 +103,20 @@ class Recipe extends React.Component {
 
   renderBloomStep() {
     if (this.state.bloomWaterG > 0) {
-      return <li>
+      return <tr>
+        <td>
+          <Timer
+            key={this.state.numOfRefreshes}
+            startMessage={'⌛'}
+            timerRunningMessage={'⌛'}
+            finishedMessage={'Done! ✅'}
+            startTimerSeconds={this.state.bloomSeconds} />
+        </td>
+        <td><li>
         Add <strong>{this.state.bloomWaterG}g</strong> of water and wait
         <strong> {this.state.bloomSeconds}</strong> seconds
-        for the coffee to bloom.
-      </li>;
+        for the coffee to bloom.</li></td>
+        </tr>
     }
   }
 
@@ -119,9 +133,18 @@ class Recipe extends React.Component {
   }
 
   renderBrewStep() {
-    return <li>
+    return <tr>
+      <td>
+        <Timer
+          key={this.state.numOfRefreshes}
+          startMessage={'⌛'}
+          timerRunningMessage={'⌛'}
+          finishedMessage={'Done! ✅'}
+          startTimerSeconds={this.state.grindBrewTime.time} />
+      </td>
+      <td><li>
       Wait <strong>{this.state.grindBrewTime.time}s</strong> to brew.
-    </li>;
+      </li></td></tr>;
   }
 
   renderStirStep() {
@@ -155,18 +178,18 @@ class Recipe extends React.Component {
           unmountOnExit
           appear>
           <ol key="k">
-            { this.renderHeatWaterStep() }
-            { this.renderGrindCoffeeStep() }
-            { this.renderInvertStep() }
-            { this.renderPourCoffeeStep() }
+            <table><tbody>
+            <tr><td></td>{ this.renderHeatWaterStep() }</tr>
+            <tr><td></td>{ this.renderGrindCoffeeStep() }</tr>
+            <tr><td></td>{ this.renderInvertStep() }</tr>
+            <tr><td></td>{ this.renderPourCoffeeStep() }</tr>
             { this.renderBloomStep() }
-            { this.renderAddWaterStep() }
-            { this.renderStirStep() }
+            <tr><td></td>{ this.renderAddWaterStep() }</tr>
+            <tr><td></td>{ this.renderStirStep() }</tr>
             { this.renderBrewStep() }
-            { this.renderEndInvertStep() }
-            <li>
-              Press.
-            </li>
+            <tr><td></td>{ this.renderEndInvertStep() }</tr>
+            <tr><td></td><td><li>Press.</li></td></tr>
+            </tbody></table>
           </ol>
         </CSSTransition>;
     } else {
