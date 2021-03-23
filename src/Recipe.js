@@ -74,77 +74,79 @@ class Recipe extends React.Component {
   }
 
   renderHeatWaterStep() {
-    return <li>
+    return <div class="recipe__instruction">
       Heat <strong>{this.state.coffeeWaterRatio.water}g</strong> of water
       to <strong>{this.state.brewTempC}°C</strong> /
       <strong>{toFahrenheit(this.state.brewTempC)}°F</strong>.
-    </li>;
+    </div>;
   }
 
   renderGrindCoffeeStep() {
-    return <li>
+    return <div class="recipe__instruction">
       Grind <strong>{this.state.coffeeWaterRatio.coffee}g</strong> of coffee to a {this.state.grindBrewTime.grind} grind.
-    </li>;
+    </div>;
   }
 
   renderPourCoffeeStep() {
-    return <li>
+    return <div class="recipe__instruction">
       Pour in the ground coffee.
-    </li>;
+    </div>;
   }
 
   renderInvertStep() {
     if (this.state.inverted) {
-      return <li>Place the aeropress in the upside-down orientation.</li>
+      return <div class="recipe__instruction">Place the aeropress in the upside-down orientation.</div>
     } else {
-      return <li>Place the aeropress on the mug in the normal orientation with wet filter and cap on.</li>
+      return <div class="recipe__instruction">Place the aeropress on the mug in the normal orientation with wet filter and cap on.</div>
     }
   }
 
   renderBloomStep() {
     if (this.state.bloomWaterG > 0) {
-      return <tr>
-        <td>
+      return <div class="recipe__instructions__row">
+        <div class="recipe__button-col">
           <Timer
             key={this.state.numOfRefreshes}
             startMessage={'⌛'}
             timerRunningMessage={'⌛'}
             finishedMessage={'Done! ✅'}
             startTimerSeconds={this.state.bloomSeconds} />
-        </td>
-        <td><li>
-        Add <strong>{this.state.bloomWaterG}g</strong> of water and wait
-        <strong> {this.state.bloomSeconds}</strong> seconds
-        for the coffee to bloom.</li></td>
-        </tr>
+        </div>
+        <div class="recipe__instruction">
+          Add <strong>{this.state.bloomWaterG}g</strong> of water and wait
+          <strong> {this.state.bloomSeconds}</strong> seconds
+          for the coffee to bloom.
+        </div>
+      </div>;
     }
   }
 
   renderAddWaterStep() {
     if (this.state.bloomWaterG > 0) {
-      return <li>
+      return <div class="recipe__instruction">
         Add the remaining <strong>{this.state.coffeeWaterRatio.water - this.state.bloomWaterG}g</strong> of water.
-      </li>;
+      </div>;
     } else {
-      return <li>
+      return <div class="recipe__instruction">
         Add all the water (<strong>{this.state.coffeeWaterRatio.water}g</strong>).
-      </li>;
+      </div>;
     }
   }
 
   renderBrewStep() {
-    return <tr>
-      <td>
+    return <div class="recipe__instructions__row">
+      <div class="recipe__button-col">
         <Timer
           key={this.state.numOfRefreshes}
           startMessage={'⌛'}
           timerRunningMessage={'⌛'}
           finishedMessage={'Done! ✅'}
           startTimerSeconds={this.state.grindBrewTime.time} />
-      </td>
-      <td><li>
-      Wait <strong>{this.state.grindBrewTime.time}s</strong> to brew.
-      </li></td></tr>;
+      </div>
+      <div class="recipe__instruction">
+        Wait <strong>{this.state.grindBrewTime.time}s</strong> to brew.
+      </div>
+    </div>;
   }
 
   renderStirStep() {
@@ -154,18 +156,18 @@ class Recipe extends React.Component {
       if (this.state.anticlockwiseStir) {
         instruction += ' Repeat in the other direction.'
       }
-      return <li>
+      return <div class="recipe__instruction">
         { instruction }
-      </li>
+      </div>
     }
   }
 
   renderEndInvertStep() {
     if (this.state.inverted) {
-      return <li>
+      return <div class="recipe__instruction">
         Wet the filter paper, and put the cap on.
         Place the mug upside-down on the aeropress and flip to be the normal orientation.
-      </li>
+      </div>
     }
   }
 
@@ -177,20 +179,42 @@ class Recipe extends React.Component {
           timeout={500}
           unmountOnExit
           appear>
-          <ol key="k">
-            <table><tbody>
-            <tr><td></td>{ this.renderHeatWaterStep() }</tr>
-            <tr><td></td>{ this.renderGrindCoffeeStep() }</tr>
-            <tr><td></td>{ this.renderInvertStep() }</tr>
-            <tr><td></td>{ this.renderPourCoffeeStep() }</tr>
+            <div class="recipe__instructions">
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              { this.renderHeatWaterStep() }
+            </div>
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              { this.renderGrindCoffeeStep() }
+            </div>
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              { this.renderInvertStep() }
+            </div>
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              { this.renderPourCoffeeStep() }
+            </div>
             { this.renderBloomStep() }
-            <tr><td></td>{ this.renderAddWaterStep() }</tr>
-            <tr><td></td>{ this.renderStirStep() }</tr>
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              { this.renderAddWaterStep() }
+            </div>
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              { this.renderStirStep() }
+            </div>
             { this.renderBrewStep() }
-            <tr><td></td>{ this.renderEndInvertStep() }</tr>
-            <tr><td></td><td><li>Press.</li></td></tr>
-            </tbody></table>
-          </ol>
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              { this.renderEndInvertStep() }
+            </div>
+            <div class="recipe__instructions__row">
+              <div class="recipe__button-col"/>
+              <div class="recipe__instruction">Press.</div>
+            </div>
+          </div>
         </CSSTransition>;
     } else {
       return <CSSTransition

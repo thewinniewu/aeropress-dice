@@ -77,6 +77,7 @@ a:active, a:hover {
 }
 
 .btn-timer {
+  margin-top: 8px;
   width: 70px;
   padding: 4px 8px;
   font-size: 16px;
@@ -143,6 +144,32 @@ ol li {
   font-size: 12px;
   padding: 5px 20px;
 
+}
+
+.recipe__instructions {
+  display: table;
+  counter-reset: css-counter 0;
+}
+
+.recipe__instructions__row {
+  display: table-row;
+}
+
+.recipe__button-col {
+  display: table-cell;
+  column-span: 1;
+}
+
+.recipe__instructions .recipe__instruction {
+  display: table-cell;
+  counter-increment: css-counter 1; /* Increase the counter by 1. */
+  padding-left: 16px;
+  padding-bottom: 8px;
+}
+
+.recipe__instruction:before {
+  content: counter(css-counter) ". ";
+  font-weight: 600;
 }
 
 .example-enter {
