@@ -2,16 +2,21 @@ import './App.css';
 import Recipe from './Recipe.js';
 import aeropress from './aeropress.svg';
 import React from 'react';
+// import useQueryParam from './useQueryParam';
+// import { useState } from 'react';
 
 class App extends React.Component {
+
   render() {
+    const recipeHash = new URLSearchParams(window.location.search).get('recipe');
+
     return (
       <div className="App">
           <header className="App-header">
             <img src={aeropress} className="App-logo" alt="logo" />
             <h1 className="App-title">Random Aeropress Recipe</h1>
           </header>
-          <Recipe/>
+          <Recipe recipeHash={recipeHash}/>
           <footer className="App-footer">
             <p>
               Built with &hearts; by <a href="https://github.com/thewinniewu">thewinniewu</a>
