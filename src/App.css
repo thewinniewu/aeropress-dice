@@ -146,6 +146,10 @@ a:active, a:hover {
   .card-block {
     width: 90%;
   }
+
+  .recipe-share__textbox {
+    width: 90%;
+  }
 }
 
 .App-footer {

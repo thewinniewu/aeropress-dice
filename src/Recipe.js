@@ -44,7 +44,7 @@ function hashToRecipe(hash) {
 class Recipe extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+
     this.handleClick = this.handleClick.bind(this);
 
     let recipe = hashToRecipe(props.recipeHash);
