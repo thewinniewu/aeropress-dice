@@ -1,6 +1,6 @@
 import './App.css';
 import Recipe from './Recipe.js';
-import aeropress from './aeropress.svg';
+import aeropress from './logo.svg';
 import React from 'react';
 // import useQueryParam from './useQueryParam';
 // import { useState } from 'react';
