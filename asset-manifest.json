@@ -1,23 +1,16 @@
 {
   "files": {
-    "main.css": "/aeropress-dice/static/css/main.a46296ba.chunk.css",
-    "main.js": "/aeropress-dice/static/js/main.887ba29c.chunk.js",
-    "main.js.map": "/aeropress-dice/static/js/main.887ba29c.chunk.js.map",
-    "runtime-main.js": "/aeropress-dice/static/js/runtime-main.baef891c.js",
-    "runtime-main.js.map": "/aeropress-dice/static/js/runtime-main.baef891c.js.map",
-    "static/js/2.71f85814.chunk.js": "/aeropress-dice/static/js/2.71f85814.chunk.js",
-    "static/js/2.71f85814.chunk.js.map": "/aeropress-dice/static/js/2.71f85814.chunk.js.map",
-    "static/js/3.7b782934.chunk.js": "/aeropress-dice/static/js/3.7b782934.chunk.js",
-    "static/js/3.7b782934.chunk.js.map": "/aeropress-dice/static/js/3.7b782934.chunk.js.map",
+    "main.css": "/aeropress-dice/static/css/main.287cf347.css",
+    "main.js": "/aeropress-dice/static/js/main.97c5b4b7.js",
+    "static/js/843.0cc0a9de.chunk.js": "/aeropress-dice/static/js/843.0cc0a9de.chunk.js",
+    "static/media/logo.svg": "/aeropress-dice/static/media/logo.8214f2d0d750701cef8397d3814e8409.svg",
     "index.html": "/aeropress-dice/index.html",
-    "static/css/main.a46296ba.chunk.css.map": "/aeropress-dice/static/css/main.a46296ba.chunk.css.map",
-    "static/js/2.71f85814.chunk.js.LICENSE.txt": "/aeropress-dice/static/js/2.71f85814.chunk.js.LICENSE.txt",
-    "static/media/aeropress.8214f2d0.svg": "/aeropress-dice/static/media/aeropress.8214f2d0.svg"
+    "main.287cf347.css.map": "/aeropress-dice/static/css/main.287cf347.css.map",
+    "main.97c5b4b7.js.map": "/aeropress-dice/static/js/main.97c5b4b7.js.map",
+    "843.0cc0a9de.chunk.js.map": "/aeropress-dice/static/js/843.0cc0a9de.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.baef891c.js",
-    "static/js/2.71f85814.chunk.js",
-    "static/css/main.a46296ba.chunk.css",
-    "static/js/main.887ba29c.chunk.js"
+    "static/css/main.287cf347.css",
+    "static/js/main.97c5b4b7.js"
   ]
 }
