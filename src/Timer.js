@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class Timer extends React.Component {
 
   constructor(props) {
@@ -18,6 +17,7 @@ class Timer extends React.Component {
       // mutable
       started: false,
       finished: false,
+      paused: false,
       currentTimerSeconds: props.startTimerSeconds,
     };
 
@@ -32,14 +32,22 @@ class Timer extends React.Component {
     this._isMounted = false;
   }
 
-  startTimer() {
-    // Do not restart interval if timer was already started
-    if (this.state.started) {
+  toggleTimer() {
+    // Do not restart interval if timer was already started, but pause it
+    if (this.state.started && !this.state.paused) {
+      this.setState({
+        paused: true,
+      });
+      return;
+    } else if (this.state.started && this.state.paused) {
+      this.setState({
+        paused: false,
+      });
       return;
     }
 
     let interval = setInterval(() => {
-      if (!this._isMounted) { return; }
+      if (!this._isMounted || this.state.paused) { return; }
 
       if (this.state.currentTimerSeconds >= 0) {
         this.setState({
@@ -72,9 +80,9 @@ class Timer extends React.Component {
 
     return (
       <button
-      className={buttonClasses.join(' ')}
-      onClick={this.startTimer.bind(this)}>
-      {message}
+        className={buttonClasses.join(' ')}
+        onClick={this.toggleTimer.bind(this)}>
+        {message}
       </button>
       )
   }
