@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/aeropress-dice/static/css/main.287cf347.css",
-    "main.js": "/aeropress-dice/static/js/main.80c74e0d.js",
+    "main.js": "/aeropress-dice/static/js/main.9f070869.js",
     "static/js/787.7edc5291.chunk.js": "/aeropress-dice/static/js/787.7edc5291.chunk.js",
     "static/media/logo.svg": "/aeropress-dice/static/media/logo.8214f2d0d750701cef8397d3814e8409.svg",
     "index.html": "/aeropress-dice/index.html",
     "main.287cf347.css.map": "/aeropress-dice/static/css/main.287cf347.css.map",
-    "main.80c74e0d.js.map": "/aeropress-dice/static/js/main.80c74e0d.js.map",
+    "main.9f070869.js.map": "/aeropress-dice/static/js/main.9f070869.js.map",
     "787.7edc5291.chunk.js.map": "/aeropress-dice/static/js/787.7edc5291.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.287cf347.css",
-    "static/js/main.80c74e0d.js"
+    "static/js/main.9f070869.js"
   ]
 }
